@@ -1,0 +1,261 @@
+<!DOCTYPE html>    
+<html lang="id">    
+<head>    
+  <meta charset="UTF-8" />    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+  <title>🎮 RPGM TRANSLATOR</title>    
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">    
+  <style>    
+    html, body {    
+      margin: 0; padding: 0;    
+      font-family: 'Segoe UI', sans-serif;    
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);    
+      overflow: hidden; color: #fff;    
+      height: 100vh; position: relative; font-size: 14px;    
+    }    
+    .stars, .shooting-stars { position: absolute; top: 0; left: 0; width: 200%; height: 200%; z-index: 0; }    
+    .stars { background: url('https://vincentgarreau.com/particles.js/assets/img/stars.png') repeat; animation: moveStars 120s linear infinite; }    
+    @keyframes moveStars { from{transform:translate(0,0);} to{transform:translate(-50%,-50%);} }    
+    .shooting-stars::before, .shooting-stars::after {    
+      content: ''; position: absolute; width:2px; height:100px;    
+      background: linear-gradient(-45deg, white, rgba(255,255,255,0));    
+      top: -50px; animation: shoot 4s linear infinite;    
+    }    
+    .shooting-stars::before { left:30%; animation-delay:2s; }    
+    .shooting-stars::after  { left:70%; animation-delay:5s; }    
+    @keyframes shoot {    
+      0%{transform:translate(0,0) rotate(45deg);opacity:0;}    
+      10%{opacity:1;}    
+      100%{transform:translate(100vw,100vh) rotate(45deg);opacity:0;}    
+    }    
+    .character {    
+      position:absolute; bottom:20px; left:-160px;    
+      width:64px; height:64px;    
+      background:url('https://raw.githubusercontent.com/ashblue/full-meta-sprite/master/meta/sprite-rpg.png') no-repeat;    
+      background-size:1536px 64px;    
+      animation: walkCycle 1s steps(24) infinite, moveAround 12s ease-in-out infinite;    
+      z-index:3;    
+    }    
+    @keyframes walkCycle {0%{background-position-x:0;}100%{background-position-x:-1536px;}}    
+    @keyframes moveAround {0%,100%{transform:translate(0,0);}50%{transform:translate(calc(100vw-80px),-10px);}}    
+    
+    .container {    
+      max-width:720px;     
+      margin:120px auto;    
+      background:rgba(0,0,0,0.85);     
+      padding:25px; border-radius:20px;    
+      box-shadow:0 0 20px rgba(0,255,255,0.5);    
+      position:relative; z-index:4; animation: glowPulse 2s ease-in-out infinite;    
+    }    
+    @keyframes glowPulse {    
+      0%,100%{box-shadow:0 0 20px rgba(0,255,255,0.3);}    
+      50%{box-shadow:0 0 40px rgba(0,255,255,0.7);}    
+    }    
+    h1 {    
+      text-align:center; font-family:'Press Start 2P', cursive;    
+      color:#00ffff; margin-bottom:25px; text-shadow:0 0 6px #00ffff;    
+      font-size:1rem; line-height:1.2;    
+    }    
+    
+    .drop-zone {    
+      border: 2px dashed #00bcd4;    
+      border-radius: 10px;    
+      padding: 20px;    
+      text-align: center;    
+      margin-top: 10px;    
+      transition: background 0.3s;    
+      cursor: pointer;    
+    }    
+    .drop-zone.hover {    
+      background: rgba(0, 188, 212, 0.2);    
+    }    
+    
+    label { font-weight:bold; display:block; margin-top:18px; font-size:0.9rem; }    
+    select, input[type="file"], button {    
+      width:100%; padding:10px; margin-top:6px; border-radius:10px;    
+      border:2px solid #00bcd4; background:#121212; color:#fff; font-size:0.9rem;    
+      transition:border-color 0.3s;    
+    }    
+    select:focus, input[type="file"]:focus { outline:none; border-color:#76ff03; }    
+    button {    
+      background-color:#00bcd4; font-weight:bold; font-size:0.95rem; padding:10px;    
+      transition:transform 0.3s; position:relative; overflow:hidden;    
+    }    
+    button:hover:not(:disabled) { transform:scale(1.02); }    
+    button.loading::after {    
+      content:""; position:absolute; top:50%; right:16px;    
+      width:18px; height:18px; border:2.5px solid #fff; border-top:2.5px solid transparent;    
+      border-radius:50%; animation:spin 1s linear infinite; transform:translateY(-50%);    
+    }    
+    @keyframes spin { to { transform:translateY(-50%) rotate(360deg); } }    
+    
+    .dot-loader { display:none; text-align:center; margin-top:16px; }    
+    .dot-loader span {    
+      display:inline-block; width:8px; height:8px; margin:0 4px;    
+      background:#00e5ff; border-radius:50%; opacity:0; animation:dotPulse 1s infinite ease-in-out;    
+    }    
+    .dot-loader span:nth-child(1){animation-delay:0s;}    
+    .dot-loader span:nth-child(2){animation-delay:0.2s;}    
+    .dot-loader span:nth-child(3){animation-delay:0.4s;}    
+    @keyframes dotPulse {0%,80%,100%{opacity:0;transform:scale(0.8);}40%{opacity:1;transform:scale(1.2);}}    
+    
+    .log {    
+      background:rgba(255,255,255,0.05); padding:12px; border-radius:10px; margin-top:18px;    
+      max-height:280px; overflow-y:auto; font-family:monospace; font-size:0.85rem; line-height:1.3;    
+    }    
+    .entry { padding:6px; margin-bottom:8px; border-left:3px solid; }    
+    .checking { border-color:#ffeb3b; background:#333; }    
+    .translated { border-color:#4caf50; background:#222; }    
+    
+    .success { margin-top:18px; font-weight:bold; color:#76ff03; font-size:0.9rem; }    
+    .download-link {    
+      display:inline-block; margin-top:12px; padding:10px 16px; background:#43a047;    
+      color:#fff; text-decoration:none; border-radius:10px; font-weight:bold; font-size:0.9rem;    
+      transition:background 0.3s;    
+    }    
+    .download-link:hover { background:#2e7d32; }    
+.stars, .shooting-stars {    
+  pointer-events: none;    
+}    
+  </style>    
+</head>    
+<body>    
+  <div class="stars"></div>    
+  <div class="shooting-stars"></div>    
+  <div class="character"></div>    
+    
+  <div class="container">    
+    <h1>🎮 RPGM TRANSLATOR</h1>    
+    <div class="drop-zone" id="dropZone">Drag & Drop File JSON atau klik untuk upload</div>    
+    <form id="uploadForm" enctype="multipart/form-data">    
+      <input type="file" id="jsonFile" name="jsonFile" accept=".json" style="display:none;" required />    
+      <label for="from">🌐 Bahasa Asal:</label>    
+      <select id="from" name="from">    
+        <option value="ja">🇯🇵 Jepang</option>    
+        <option value="en">🇬🇧 Inggris</option>    
+        <option value="id">🇮🇩 Indonesia</option>    
+      </select>    
+      <label for="to">🌍 Terjemahkan Ke:</label>    
+      <select id="to" name="to">    
+        <option value="id">🇮🇩 Indonesia</option>    
+        <option value="en">🇬🇧 Inggris</option>    
+        <option value="ja">🇯🇵 Jepang</option>    
+      </select>    
+      <button type="submit" id="translateBtn">🔁 Translate</button>    
+      <div class="dot-loader" id="dotLoader"><span></span><span></span><span></span></div>    
+    </form>    
+    <div id="success" class="success"></div>    
+    <div id="result" class="log" style="display:none;"></div>    
+    <a id="downloadLink" class="download-link" style="display:none;">⬇️ Unduh Hasil</a>    
+    <a id="reviewBtn" class="download-link" style="display:none; background:#ff9800;">🔍 Review Hasil</a>    
+  </div>    
+    
+  <script>    
+    const form = document.getElementById('uploadForm');    
+    const translateBtn = document.getElementById('translateBtn');    
+    const resultDiv = document.getElementById('result');    
+    const successDiv = document.getElementById('success');    
+    const downloadLink = document.getElementById('downloadLink');    
+    const reviewBtn = document.getElementById('reviewBtn');    
+    const dotLoader = document.getElementById('dotLoader');    
+    const dropZone = document.getElementById('dropZone');    
+    const jsonFile = document.getElementById('jsonFile');    
+    
+    dropZone.addEventListener('click', () => jsonFile.click());    
+    dropZone.addEventListener('dragover', e => {    
+      e.preventDefault();    
+      dropZone.classList.add('hover');    
+    });    
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('hover'));    
+    dropZone.addEventListener('drop', e => {    
+      e.preventDefault();    
+      dropZone.classList.remove('hover');    
+      jsonFile.files = e.dataTransfer.files;    
+      if (jsonFile.files.length > 0) {    
+        dropZone.textContent = '📁 ' + jsonFile.files[0].name;    
+      }    
+    });    
+    jsonFile.addEventListener('change', () => {    
+      if (jsonFile.files.length > 0) {    
+        dropZone.textContent = '📁 ' + jsonFile.files[0].name;    
+      }    
+    });    
+    
+    function appendEntry(container, type, text) {    
+      const entry = document.createElement('div');    
+      entry.className = `entry ${type}`;    
+      entry.textContent = text;    
+      container.appendChild(entry);    
+    }    
+    
+    form.addEventListener('submit', async e => {    
+      e.preventDefault();    
+      translateBtn.disabled = true;    
+      translateBtn.classList.add('loading');    
+      resultDiv.innerHTML = '';    
+      resultDiv.style.display = 'none';    
+      successDiv.textContent = '';    
+      downloadLink.style.display = 'none';    
+      reviewBtn.style.display = 'none';    
+      dotLoader.style.display = 'block';    
+    
+      const file = jsonFile.files[0];    
+      const from = document.getElementById('from').value;    
+      const to = document.getElementById('to').value;    
+      const formData = new FormData();    
+      formData.append('jsonFile', file);    
+      formData.append('from', from);    
+      formData.append('to', to);    
+    
+      try {    
+        const res = await fetch('translate.php', { method: 'POST', body: formData });    
+        const data = await res.json();    
+        if (data.error) {    
+          appendEntry(resultDiv, 'checking', 'Error: ' + data.error);    
+        } else {    
+          const filename = data.download_url.split('=')[1];    
+    
+          data.log.split('---').forEach(seg => {    
+            const before = seg.match(/Before:(.*)/)?.[1]?.trim();    
+            const after  = seg.match(/After:(.*)/)?.[1]?.trim();    
+            if (before && after) {    
+              appendEntry(resultDiv, 'translated', `Before: ${before} → After: ${after}`);    
+            }    
+          });    
+    
+          successDiv.textContent = `✅ Berhasil menerjemahkan ${data.translated_count} teks`;    
+          downloadLink.href = data.download_url;    
+          downloadLink.style.display = 'inline-block';    
+          reviewBtn.href = `review.html?file=${encodeURIComponent(filename)}`;    
+          reviewBtn.style.display = 'inline-block';    
+        }    
+        resultDiv.style.display = 'block';    
+        resultDiv.scrollTop = resultDiv.scrollHeight;    
+      } catch {    
+        appendEntry(resultDiv, 'checking', 'Error: Gagal mengirim permintaan ke server.');    
+        resultDiv.style.display = 'block';    
+      } finally {    
+        setTimeout(() => {    
+          translateBtn.disabled = false;    
+          translateBtn.classList.remove('loading');    
+          dotLoader.style.display = 'none';    
+        }, 800);    
+      }    
+    });    
+  </script>    
+<footer style="background:rgba(255,255,255,0.05); padding:1.2rem; text-align:center; font-size:0.85rem; color:#ccc; border-top:1px solid rgba(255,255,255,0.1); margin-top:3rem; position:relative; z-index:10;">    
+  <div style="margin-bottom:0.8rem;">    
+    💖 <strong>Dukung Proyek Ini</strong><br>    
+    Situs ini gratis digunakan. Jika kamu terbantu, kamu bisa berdonasi melalui:<br><br>    
+    <a href="https://trakteer.id/Nova_ardiann/tip" target="_blank" style="color:#00e5ff;">☕ Trakteer</a> |    
+    <a href="https://saweria.co/novaardian" target="_blank" style="color:#00e5ff;">💰 Saweria</a>    
+  </div>    
+  <div>    
+    📬 <strong>Kontak & Saran</strong><br>    
+    Email: <a href="mailto:kamu@email.com" style="color:#00e5ff;">novadev.sukadd@gmail.com</a><br>    
+    WhatsApp: <a href="https://wa.me/6285178084374" target="_blank" style="color:#00e5ff;">Chat WA</a><br>    
+    Facebook: <a href="https://www.facebook.com/share/16W74vmavK/" target="_blank" style="color:#00e5ff;">facebook.com/Novadev</a>    
+  </div>    
+</footer>    
+</body>    
+</html>
