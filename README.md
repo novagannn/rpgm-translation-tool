@@ -34,6 +34,9 @@ A web-based translator for `.json` files — primarily designed for **RPG Maker*
 Here’s a quick look at the interface and workflow:
 
 ![Web Translator UI](assets/screenshot1.png)
+
+Riview Mode
+
 ![Review Mode](assets/screenshot2.png)
 
 ---
