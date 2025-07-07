@@ -131,14 +131,6 @@ This project is built with passion — and is always open for improvements.
 
 We're excited to grow this tool with the help of developers, translators, and creatives from around the world.
 
-```
-🧑‍💻 Contributors Hall of Fame:
-- Nova Ardian — Creator & Maintainer
-
-✨ You could be next...
-
-All meaningful contributions (code, feedback, design, testing) will be credited here.
-```
 
 ---
 
