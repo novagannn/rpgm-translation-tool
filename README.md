@@ -141,7 +141,7 @@ We're excited to grow this tool with the help of developers, translators, and cr
 | Nova Ardian  | Creator & Maintainer   | ⭐ Active   |
 | 🤔 Your Name? | Contributor             | 🔓 Waiting... |
 
-Want your name here? Start contributing by [opening an issue](https://github.com/novagannn/json-translator/issues) or sending a pull request.
+Want your name here? Start contributing by [opening an issue](https://github.com/novagannn/rpgm-translation-tool/issues) or sending a pull request.
 
 ---
 
@@ -149,7 +149,7 @@ Want your name here? Start contributing by [opening an issue](https://github.com
 
 Have questions, ideas, or collaboration offers?
 
-- GitHub Issues: [Submit here](https://github.com/novagannn/json-translator/issues)
+- GitHub Issues: [Submit here](https://github.com/novagannn/rpgm-translation-tool/issues)
 - GitHub Profile: [@novagannn](https://github.com/novagannn)
 - Email: [nova.ardian.dev@gmail.com](mailto:you@example.com)
 
