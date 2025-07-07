@@ -1,0 +1,20 @@
+# Ignore folders for runtime content
+uploads/
+logs/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Backup and temp files
+*.bak
+*.tmp
+*.swp
+*.log
+*.cache
+
+# Composer (if used later)
+vendor/
+
+# Environment config (if used)
+.env
