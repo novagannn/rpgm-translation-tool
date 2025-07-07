@@ -31,8 +31,9 @@ A web-based translator for `.json` files — primarily designed for **RPG Maker*
 
 ## 🎬 Demo
 
-> *(Add a demo video or screenshots here to show the UI/UX)*
+Here’s a quick look at the UI:
 
+![Web Translator Interface](assets/demo.png)
 ---
 
 ## 🛠️ Getting Started
