@@ -121,8 +121,9 @@ You are free to use, modify, and distribute this software with proper credit to 
 
 Have questions, ideas, or collaboration offers?
 
-- GitHub Issues: [Submit here](https://github.com/yourusername/yourrepo/issues)
-- Email: [you@example.com](mailto:you@example.com)
+- GitHub Issues: [Submit here](https://github.com/novagannn/json-translator/issues)
+- GitHub Profile: [@novagannn](https://github.com/novagannn)
+- Email: [nova.ardian.dev@gmail.com](mailto:you@example.com)
 
 ---
 
