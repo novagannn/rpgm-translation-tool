@@ -131,18 +131,17 @@ This project is built with passion — and is always open for improvements.
 
 We're excited to grow this tool with the help of developers, translators, and creatives from around the world.
 
-```txt
+```
 🧑‍💻 Contributors Hall of Fame:
 - Nova Ardian — Creator & Maintainer
 
 ✨ You could be next...
 
-> All meaningful contributions (code, feedback, design, testing) will be credited here.
-
+All meaningful contributions (code, feedback, design, testing) will be credited here.
+```
 
 ---
 
-```markdown
 ## 🏆 Contributors Wall
 
 | Name         | Role                   | Status     |
@@ -151,7 +150,6 @@ We're excited to grow this tool with the help of developers, translators, and cr
 | 🤔 Your Name? | Contributor             | 🔓 Waiting... |
 
 Want your name here? Start contributing by [opening an issue](https://github.com/novagannn/json-translator/issues) or sending a pull request.
-
 
 ---
 
