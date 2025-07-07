@@ -1,5 +1,10 @@
 # 🌐 RPG Maker JSON Translator Web Tool
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Backend](https://img.shields.io/badge/Backend-PHP-blue)
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![Author](https://img.shields.io/badge/made%20by-Nova%20Ardian-orange)
+
 A web-based translator for `.json` files — primarily designed for **RPG Maker** games — with smart caching, review mode, progress tracking, and modular translation memory. Built for developers, localizers, and translators working on game dialogue or structured data in JSON format.
 
 ---
