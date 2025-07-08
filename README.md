@@ -79,7 +79,6 @@ index.html                ← Main frontend UI
 translate.php             ← Main backend handler
 rules.json                ← Optional rules for custom translation logic
 wordbank.json             ← Custom user-defined translations
-translation_memory.json   ← Cache for previously translated phrases
 ```
 
 ---
