@@ -104,7 +104,7 @@ H --> I[Show Review interface]
 
 ## 💡 Contributing
 
-We welcome contributions from the community. Whether it's fixing bugs, adding features, or improving documentation — every bit helps!
+We welcome contributions from the community. Whether it's fixing bugs, adding features, or improving documentation, every bit helps!
 
 ### To contribute:
 
@@ -127,7 +127,7 @@ You are free to use, modify, and distribute this software with proper credit to 
 
 ## 🙌 Contributors
 
-This project is built with passion — and is always open for improvements.
+This project is built with passion and is always open for improvements.
 
 We're excited to grow this tool with the help of developers, translators, and creatives from around the world.
 
@@ -155,4 +155,4 @@ Have questions, ideas, or collaboration offers?
 
 ---
 
-> _"Translation is not just about language — it's about bridging understanding."_
+> _"Translation is not just about language, it's about bridging understanding."_
